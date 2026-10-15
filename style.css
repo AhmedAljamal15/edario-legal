@@ -1,0 +1,352 @@
+/* EDARIO — legal pages
+   Mobile-first, no external fonts or scripts. Light/dark follows the OS. */
+
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #eef1f5;
+  --text: #17202e;
+  --muted: #566173;
+  --border: #dde2ea;
+  --accent: #1e3055;
+  --accent-text: #ffffff;
+  --link: #1f5fbf;
+  --warn-bg: #fff6e5;
+  --warn-border: #f0c873;
+  --ok-bg: #eaf6ee;
+  --ok-border: #9fd3ae;
+  --radius: 14px;
+  --font-ar: "Segoe UI", "Noto Naskh Arabic", "Noto Sans Arabic", Tahoma, "Geeza Pro", "Arial", sans-serif;
+  --font-en: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f141c;
+    --surface: #171e29;
+    --surface-2: #1e2734;
+    --text: #e8edf4;
+    --muted: #a3aebf;
+    --border: #2a3444;
+    --accent: #8fb1ff;
+    --accent-text: #0f141c;
+    --link: #8fb1ff;
+    --warn-bg: #2b2414;
+    --warn-border: #7a6224;
+    --ok-bg: #14261b;
+    --ok-border: #2f6a42;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ar);
+  font-size: 1rem;
+  line-height: 1.85;
+  overflow-wrap: break-word;
+}
+
+[lang="en"] {
+  font-family: var(--font-en);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 3px;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- header ---------- */
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.brand {
+  font-family: var(--font-en);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 1.15rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 0.95rem;
+}
+
+.site-nav a {
+  text-decoration: none;
+  padding: 4px 0;
+}
+
+.site-nav a[aria-current="page"] {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ---------- layout ---------- */
+
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 16px 48px;
+}
+
+.lang-switch {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  line-height: 1.4;
+  margin: 0.2em 0 0.3em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin: 1.8em 0 0.5em;
+  padding-top: 0.6em;
+  border-top: 1px solid var(--border);
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 1.3em 0 0.4em;
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 0.9em;
+}
+
+ul,
+ol {
+  padding-inline-start: 1.4em;
+}
+
+li {
+  margin-bottom: 0.35em;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.lead {
+  font-size: 1.05rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin: 0 0 14px;
+}
+
+.card > :last-child {
+  margin-bottom: 0;
+}
+
+.note {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin: 0 0 14px;
+}
+
+.ok {
+  background: var(--ok-bg);
+  border: 1px solid var(--ok-border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin: 0 0 14px;
+}
+
+.note > :last-child,
+.ok > :last-child {
+  margin-bottom: 0;
+}
+
+.toc {
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+}
+
+.toc ol {
+  margin: 0;
+}
+
+.steps li {
+  margin-bottom: 0.6em;
+}
+
+.ui {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+.email {
+  font-family: var(--font-en);
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+.cta {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--accent-text);
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 4px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0 0 18px;
+}
+
+.grid .card {
+  margin: 0;
+}
+
+.grid .card h2,
+.grid .card h3 {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+
+/* Tables become stacked blocks on phones (no horizontal page scroll). */
+.table-wrap {
+  overflow-x: auto;
+  margin: 0 0 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: var(--surface);
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  vertical-align: top;
+  text-align: start;
+}
+
+th {
+  background: var(--surface-2);
+}
+
+/* ---------- English half ---------- */
+
+.lang-section {
+  margin-top: 40px;
+  padding-top: 8px;
+  border-top: 3px solid var(--border);
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.site-footer .inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.site-footer p {
+  margin: 0.2em 0;
+}
+
+@media (min-width: 640px) {
+  body {
+    font-size: 1.05rem;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  main {
+    padding: 28px 24px 64px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  .lang-switch {
+    display: none;
+  }
+
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+}
