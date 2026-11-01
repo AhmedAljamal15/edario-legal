@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>تأكيد البريد — EDARIO</title>
+  <link rel="stylesheet" href="links.css">
+  <script src="config.js"></script>
+</head>
+<body>
+  <main class="card">
+    <div class="logo">EDARIO</div>
+    <h1>بريدك اتأكد ✓</h1>
+    <p id="msg">بنرجّعك للتطبيق…</p>
+    <a class="btn" id="open" href="#">افتح التطبيق</a>
+    <p class="hint">لو فاتح من الكمبيوتر: افتح تطبيق EDARIO على موبايلك وسجّل دخول عادي.</p>
+  </main>
+  <script>
+    // التأكيد نفسه بيحصل على السيرفر قبل ما الرابط يوصل هنا. الصفحة بتسلّم
+    // الرابط للتطبيق عشان يكمّل الدخول لوحده لو مفتوح من نفس الموبايل.
+    var target = 'edario://confirm-email/' + location.search + location.hash;
+    document.getElementById('open').href = target;
+    if (window.isMobile()) {
+      window.openEdarioApp('confirm-email');
+    } else {
+      document.getElementById('msg').textContent =
+        'تقدر تقفل الصفحة دي وتسجّل دخول من التطبيق.';
+    }
+  </script>
+</body>
+</html>

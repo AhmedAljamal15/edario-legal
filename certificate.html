@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>التحقق من شهادة — EDARIO</title>
+  <link rel="stylesheet" href="links.css">
+  <script src="config.js"></script>
+</head>
+<body>
+  <main class="card">
+    <div class="logo">EDARIO</div>
+    <h1>التحقق من شهادة</h1>
+    <p id="status">جاري التحقق…</p>
+    <div id="result"></div>
+    <a class="btn" id="open" href="#" hidden>افتح في التطبيق</a>
+  </main>
+  <script>
+    // ★ أي كاميرا موبايل بتفتح الصفحة دي من الـQR — مش محتاج التطبيق.
+    //   السيرفر بيرجّع بيانات الشهادة دي بس بالتوكن العشوائي اللي في الـQR.
+    var UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    var token = new URLSearchParams(location.search).get('t') || '';
+    var statusEl = document.getElementById('status');
+    var resultEl = document.getElementById('result');
+
+    function row(label, value) {
+      if (value === null || value === undefined || value === '') return '';
+      var dt = document.createElement('dt'); dt.textContent = label;
+      var dd = document.createElement('dd'); dd.textContent = value;
+      return dt.outerHTML + dd.outerHTML;
+    }
+    function date(v) {
+      return v ? new Date(v).toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+    }
+
+    if (!UUID.test(token)) {
+      statusEl.textContent = 'رابط الشهادة مش صحيح.';
+    } else {
+      var open = document.getElementById('open');
+      open.href = 'edario://certificate-verify/' + token;
+      if (window.isMobile()) open.hidden = false;
+      fetch(window.EDARIO.supabaseUrl + '/rest/v1/rpc/ecl_verify_certificate', {
+        method: 'POST',
+        headers: {
+          'apikey': window.EDARIO.publishableKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ p_verification_token: token })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('http ' + r.status);
+        return r.json();
+      }).then(function (rows) {
+        var c = Array.isArray(rows) ? rows[0] : rows;
+        if (!c) {
+          statusEl.innerHTML = '<span class="badge bad">الشهادة دي مش موجودة</span>';
+          return;
+        }
+        statusEl.innerHTML = c.is_valid
+          ? '<span class="badge ok">شهادة سليمة ✓</span>'
+          : '<span class="badge bad">الشهادة دي اتلغت</span>';
+        resultEl.innerHTML = '<dl>' +
+          row('اسم الطالب', c.student_name) +
+          row('الكورس', c.course_name + (c.level_name ? ' — ' + c.level_name : '')) +
+          row('المحاضر', c.instructor_name) +
+          row('السنتر', c.center_name) +
+          row('رقم الشهادة', c.certificate_number) +
+          row('تاريخ الإصدار', date(c.issued_at)) +
+          (c.is_valid ? '' : row('سبب الإلغاء', c.revoked_reason)) +
+          '</dl>';
+      }).catch(function () {
+        statusEl.textContent = 'تعذر التحقق دلوقتي — جرّب تاني بعد شوية.';
+      });
+    }
+  </script>
+</body>
+</html>
