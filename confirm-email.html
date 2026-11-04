@@ -11,17 +11,48 @@
 <body>
   <main class="card">
     <div class="logo">EDARIO</div>
-    <h1>بريدك اتأكد ✓</h1>
+    <h1 id="title">بريدك اتأكد ✓</h1>
     <p id="msg">بنرجّعك للتطبيق…</p>
     <a class="btn" id="open" href="#">افتح التطبيق</a>
-    <p class="hint">لو فاتح من الكمبيوتر: افتح تطبيق EDARIO على موبايلك وسجّل دخول عادي.</p>
+    <p class="hint" id="hint">لو فاتح من الكمبيوتر: افتح تطبيق EDARIO على موبايلك وسجّل دخول عادي.</p>
   </main>
   <script>
     // التأكيد نفسه بيحصل على السيرفر قبل ما الرابط يوصل هنا. الصفحة بتسلّم
     // الرابط للتطبيق عشان يكمّل الدخول لوحده لو مفتوح من نفس الموبايل.
     var target = 'edario://confirm-email/' + location.search + location.hash;
     document.getElementById('open').href = target;
-    if (window.isMobile()) {
+
+    // ★★ لما الرابط يكون انتهى أو اتستخدم، السيرفر بيحوّل هنا بـ
+    //    `#error=...&error_code=otp_expired` (أو في الـquery). الصفحة كانت
+    //    بتقول «بريدك اتأكد ✓» برضه — والمستخدم يحاول يدخل ويترفض.
+    function readParam(name) {
+      var sources = [location.hash.replace(/^#/, ''), location.search.replace(/^\?/, '')];
+      for (var i = 0; i < sources.length; i++) {
+        try {
+          var value = new URLSearchParams(sources[i]).get(name);
+          if (value) return value;
+        } catch (e) {}
+      }
+      return null;
+    }
+
+    var error = readParam('error');
+    var errorCode = readParam('error_code');
+
+    if (error || errorCode) {
+      var expired = errorCode === 'otp_expired' ||
+        /expired|invalid/i.test(readParam('error_description') || '');
+      document.getElementById('title').textContent = expired
+        ? 'الرابط انتهى — اطلب رابط جديد من التطبيق'
+        : 'الرابط ده مش شغّال — اطلب رابط جديد من التطبيق';
+      document.getElementById('msg').textContent =
+        'افتح تطبيق EDARIO وسجّل دخولك. لو قالك إن بريدك لسه ما اتأكدش، ' +
+        'اضغط «ابعت رابط التأكيد تاني» وافتح الرابط الجديد من نفس الموبايل. ' +
+        'ولو كنت أكدته قبل كده، الدخول هيعدّي عادي.';
+      document.getElementById('hint').textContent =
+        'الرابط بيشتغل مرة واحدة ولفترة محدودة — أحدث رابط وصلك هو اللي يتفتح.';
+      // ★ مابنفتحش التطبيق لوحده هنا: المستخدم لازم يقرا الخطوة الجاية الأول.
+    } else if (window.isMobile()) {
       window.openEdarioApp('confirm-email');
     } else {
       document.getElementById('msg').textContent =
