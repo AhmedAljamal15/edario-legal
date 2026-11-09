@@ -26,7 +26,7 @@
 
     <!-- ===================================================== العربية -->
     <h1>سياسة الخصوصية</h1>
-    <p class="meta">آخر تحديث: 15 أكتوبر 2026</p>
+    <p class="meta">آخر تحديث: 9 نوفمبر 2026</p>
 
     <nav class="toc" aria-label="محتويات الصفحة">
       <ol>
@@ -125,7 +125,7 @@
     <h3>3.6 بيانات تقنية تُجمع تلقائيًا</h3>
     <ul>
       <li>
-        <strong>تقارير الأعطال والتشخيص (Firebase Crashlytics):</strong> تفاصيل العطل التقنية، ونوع الجهاز وإصدار نظام التشغيل،
+        <strong>تقارير الأعطال والتشخيص (Firebase Crashlytics):</strong> تفاصيل العطل التقنية، أو نوع ورمز الخطأ الذي ظهر لك كرسالة واسم الشاشة (دون نص الخطأ)، ونوع الجهاز وإصدار نظام التشغيل،
         وإصدار التطبيق، ومعرّف تثبيت عشوائي، والمعرّف الداخلي لحسابك (رقم عشوائي لا يحمل اسمك)، ونوع الحساب، والرقم الداخلي للسنتر.
       </li>
       <li>
@@ -135,11 +135,15 @@
         تستنتج Google Analytics <strong>موقعًا تقريبيًا</strong> (الدولة أو المدينة) من عنوان IP. لا نجمع معرّف الإعلانات.
       </li>
       <li>
+        <strong>قياس سرعة التطبيق (Firebase Performance Monitoring):</strong> مدة فتح التطبيق وسرعة عرض الشاشات، وزمن كل طلب
+        للخادم وحالته وحجمه مع اسم الجدول أو الخدمة فقط (دون معرّفات أو كلمات بحث أو أي محتوى)، ونوع الجهاز وإصدار نظام التشغيل
+        والتطبيق، والدولة وشركة الاتصالات.
+      </li>
+      <li>
         <strong>ماسح أكواد QR:</strong> صورة الكاميرا تُعالج على جهازك فقط (Google ML Kit)، وقد ترسل المكتبة إلى Google
         مقاييس أداء واستخدام مجهولة (نوع الجهاز، إصدار التطبيق، زمن المعالجة) دون الصورة.
       </li>
       <li><strong>تحديثات التطبيق (Shorebird):</strong> عند البحث عن تحديث يُرسَل إصدار التطبيق ومعرّف تثبيت عشوائي لا يحدد هويتك.</li>
-      <li><strong>الخطوط (Google Fonts):</strong> يُنزّل التطبيق ملفات الخطوط من خوادم Google، ويتضمن هذا الطلب عنوان IP كأي طلب على الإنترنت.</li>
       <li>يحتفظ التطبيق ببعض البيانات على جهازك (مثل نسخة من حجوزاتك) لتعمل الشاشات أسرع وعند ضعف الإنترنت.</li>
     </ul>
 
@@ -200,6 +204,11 @@
             <td>الشاشات والأحداث العامة والمعرّفات العشوائية والموقع التقريبي المستنتج من IP، دون معرّف الإعلانات.</td>
           </tr>
           <tr>
+            <td>Google Firebase Performance Monitoring</td>
+            <td>قياس سرعة التطبيق.</td>
+            <td>أزمنة فتح التطبيق والشاشات والطلبات المذكورة في 3.6، ونوع الجهاز وإصداره والدولة وشركة الاتصالات.</td>
+          </tr>
+          <tr>
             <td>Google Gemini API</td>
             <td>أدوات الذكاء الاصطناعي في الامتحانات لصاحب السنتر والمحاضر فقط. طرف ثالث وليس مقدم خدمة فقط (القسم 7).</td>
             <td>ما يكتبه المحاضر لتوليد الأسئلة، أو صور صفحات ورقة امتحان، أو نص السؤال المقالي والإجابة النموذجية ونص إجابة الطالب دون اسمه.</td>
@@ -208,11 +217,6 @@
             <td>Google ML Kit</td>
             <td>قراءة أكواد QR على الجهاز.</td>
             <td>مقاييس أداء مجهولة، دون صور.</td>
-          </tr>
-          <tr>
-            <td>Google Fonts</td>
-            <td>تنزيل خطوط التطبيق.</td>
-            <td>عنوان IP وبيانات الطلب التقنية.</td>
           </tr>
           <tr>
             <td>Shorebird</td>
@@ -361,7 +365,7 @@
     <!-- ===================================================== English -->
     <section id="en" class="lang-section" lang="en" dir="ltr">
       <h1>Privacy Policy</h1>
-      <p class="meta">Last updated: 15 October 2026</p>
+      <p class="meta">Last updated: 9 November 2026</p>
 
       <nav class="toc" aria-label="Contents">
         <ol>
@@ -461,7 +465,7 @@
       <h3>3.6 Technical data collected automatically</h3>
       <ul>
         <li>
-          <strong>Crash reports and diagnostics (Firebase Crashlytics):</strong> technical crash details, device model and OS version,
+          <strong>Crash reports and diagnostics (Firebase Crashlytics):</strong> technical crash details, or the type and code of an error shown to you as a message and the screen name (never the error text), device model and OS version,
           app version, a random installation ID, your internal account ID (a random number that does not contain your name),
           your account type, and the centre's internal ID.
         </li>
@@ -472,11 +476,15 @@
           Google Analytics derives an <strong>approximate location</strong> (country or city) from the IP address. We do not collect the advertising ID.
         </li>
         <li>
+          <strong>App speed measurement (Firebase Performance Monitoring):</strong> app start time and screen rendering speed, and for each
+          server request its duration, status and size with only the table or service name (no IDs, search terms or any content),
+          plus device model, OS and app version, country and mobile carrier.
+        </li>
+        <li>
           <strong>QR scanner:</strong> the camera image is processed on your device only (Google ML Kit); the library may send Google
           anonymous performance and usage metrics (device model, app version, processing time), never the image.
         </li>
         <li><strong>App updates (Shorebird):</strong> when checking for an update, the app version and a random installation ID that does not identify you are sent.</li>
-        <li><strong>Fonts (Google Fonts):</strong> the app downloads its font files from Google's servers; like any internet request this includes your IP address.</li>
         <li>The app keeps some data on your device (for example a copy of your bookings) so screens load faster and work on weak connections.</li>
       </ul>
 
@@ -537,6 +545,11 @@
               <td>Screens, generic events, random IDs and approximate location derived from IP; no advertising ID.</td>
             </tr>
             <tr>
+              <td>Google Firebase Performance Monitoring</td>
+              <td>Measuring app speed.</td>
+              <td>App start, screen and request timings listed in 3.6, device model and version, country and carrier.</td>
+            </tr>
+            <tr>
               <td>Google Gemini API</td>
               <td>AI tools for exams, for centre owners and instructors only. A third party, not only a service provider (section 7).</td>
               <td>What the instructor types to generate questions, page images of an exam paper, or an essay question, its model answer and the text of the student's answer without the student's name.</td>
@@ -545,11 +558,6 @@
               <td>Google ML Kit</td>
               <td>Reading QR codes on the device.</td>
               <td>Anonymous performance metrics, no images.</td>
-            </tr>
-            <tr>
-              <td>Google Fonts</td>
-              <td>Downloading the app's fonts.</td>
-              <td>IP address and technical request data.</td>
             </tr>
             <tr>
               <td>Shorebird</td>
